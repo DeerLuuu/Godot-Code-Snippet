@@ -3,10 +3,7 @@ extends EditorPlugin
 
 # NOTE 代码编辑器
 var script_editor: ScriptEditor
-<<<<<<< HEAD
 var config : Dictionary
-=======
->>>>>>> 684eb8277cdcf465ec94bcfd31f7b741653f336b
 var default : Dictionary
 var snippets : Dictionary
 
@@ -32,21 +29,9 @@ func fs_update() -> void:
 		for line in script_lines:
 			check_script_has_auto_tip(line)
 
-func fs_update() -> void:
-	var all_script_path : Array[String] = get_all_script_path()
-	for i in all_script_path:
-		var file = FileAccess.open(i, FileAccess.READ)
-		var script_lines : Array = file.get_as_text().split("\n")
-		for line in script_lines:
-			check_script_has_auto_tip(line)
-
 # FUNC 更新自定义代码片段
 func update_code_block_dic() -> void:
-<<<<<<< HEAD
 	default = preload("res://custom_codes/config.json").data["my_custom_codes"]
-=======
-	default = preload("res://custom_codes/my_code.json").data
->>>>>>> 684eb8277cdcf465ec94bcfd31f7b741653f336b
 
 func _on_script_file_changed(script : Script) -> void:
 	update_code_block_dic()
@@ -64,25 +49,9 @@ func _on_code_completion_requested(code_edit : CodeEdit):
 	var line_text : String = get_current_line_text(code_edit)
 	var prefix = _get_selected_text(code_edit)
 	if line_text.contains("\"") or line_text.contains("\'"):
-<<<<<<< HEAD
 		if not line_text.contains("subscribe("): return
 		if snippets.is_empty(): return
 		for keyword in snippets:
-=======
-		for keyword in snippets:
-			if keyword.begins_with(prefix):
-				# 添加自定义补全项
-				code_edit.add_code_completion_option(
-					CodeEdit.KIND_FUNCTION,
-					keyword,
-					snippets[keyword],
-					Color.AQUA
-					)
-		return
-	for keyword in default:
-		if keyword.begins_with(prefix):
-			# 添加自定义补全项
->>>>>>> 684eb8277cdcf465ec94bcfd31f7b741653f336b
 			code_edit.add_code_completion_option(
 				CodeEdit.KIND_FUNCTION,
 				keyword,
@@ -156,7 +125,6 @@ func _traverse_fs(dir : EditorFileSystemDirectory) -> Array[String]:
 
 # FUNC 根据特定格式将一些关键词添加到自动提示中
 func check_script_has_auto_tip(line : String) -> void:
-<<<<<<< HEAD
 	config = preload("res://custom_codes/config.json").data["config"]
 	if not config["auto_add_reg_ex_enabled"]: return
 	var regex : RegEx = RegEx.new()
@@ -166,14 +134,4 @@ func check_script_has_auto_tip(line : String) -> void:
 		if result:
 			var str : String = result.get_string().remove_chars(" ").trim_prefix(rule[1])
 			snippets[str] = "event:" + str
-=======
-	var current_line_str : String = line
-	if current_line_str.contains("event:"):
-		if current_line_str.contains("contains"): return
-		if current_line_str.contains("event:\""): return
-		var current_str_pos : int = current_line_str.find("l:")
-		current_line_str = current_line_str.erase(0, current_str_pos + 2)
-		var del_str_pos : int = current_line_str.find("\"")
-		current_line_str = current_line_str.erase(del_str_pos, current_line_str.length() - del_str_pos)
-		snippets[current_line_str] = "event:" + current_line_str
->>>>>>> 684eb8277cdcf465ec94bcfd31f7b741653f336b
+			print(str)
