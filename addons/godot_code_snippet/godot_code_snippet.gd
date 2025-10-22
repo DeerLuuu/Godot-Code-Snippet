@@ -31,7 +31,7 @@ func fs_update() -> void:
 
 # FUNC 更新自定义代码片段
 func update_code_block_dic() -> void:
-	default = preload("res://custom_codes/config.json").data["my_custom_codes"]
+	default = preload("res://addons/godot_code_snippet/config.json").data["my_custom_codes"]
 
 func _on_script_file_changed(script : Script) -> void:
 	update_code_block_dic()
@@ -125,7 +125,7 @@ func _traverse_fs(dir : EditorFileSystemDirectory) -> Array[String]:
 
 # FUNC 根据特定格式将一些关键词添加到自动提示中
 func check_script_has_auto_tip(line : String) -> void:
-	config = preload("res://custom_codes/config.json").data["config"]
+	config = preload("res://addons/godot_code_snippet/config.json").data["config"]
 	if not config["auto_add_reg_ex_enabled"]: return
 	var regex : RegEx = RegEx.new()
 	for rule in config["auto_add_reg_ex"].values():

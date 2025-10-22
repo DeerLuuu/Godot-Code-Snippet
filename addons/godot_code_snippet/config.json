@@ -1,0 +1,11 @@
+{
+	"my_custom_codes" : {
+
+	},
+	"config" : {
+		"auto_add_reg_ex_enabled" : false,
+		"auto_add_reg_ex" : {
+
+		},
+	},
+}
