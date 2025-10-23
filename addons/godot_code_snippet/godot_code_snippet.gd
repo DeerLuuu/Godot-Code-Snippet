@@ -62,6 +62,7 @@ func _on_code_completion_requested(code_edit : CodeEdit):
 		return
 	if default.is_empty(): return
 	for keyword in default:
+		if not keyword.contains(line_text.strip_edges()): continue
 		# 添加自定义补全项
 		code_edit.add_code_completion_option(
 			CodeEdit.KIND_FUNCTION,
