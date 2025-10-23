@@ -1,0 +1,32 @@
+{
+	"my_custom_codes" : {
+		"varc": "var new_var : Variant",
+		"await_timer" : "await get_tree().create_timer(1.).timeout",
+		"tweenc" : "var tween : Tween = create_tween()",
+	},
+	"config" : {
+		"auto_add_reg_ex_enabled" : true,
+		"auto_add_reg_ex" : {
+			"auto_add_event_name_rule" : [
+				"EventController.push_event\\(\"event:[^\"]*",
+				"EventController.push_event(\""
+				],
+			"auto_add_state_name_rule" : [
+				"state_name\\s*=\\s*\"state:\\s*[^\"]*",
+				"state_name=\""
+				]
+		},
+	},
+	"\\": {
+		"my_custom_codes" : "你可以在 my_custom_codes 中添加你的自定义代码片段",
+		"片段示例" : "
+			‘期望显示在自动提升中的提示词’ : ‘自动补全的字段，如需换行或制表符请使用对应的 \n \t’
+		",
+		"config" : "你可以在 config 中自定义规则，将符合规则的字符串加入自动提示中",
+		"config[auto_add_reg_ex_enabled]" : "开启或关闭自定义规则功能",
+		"config[auto_add_reg_ex]" : "在 auto_add_reg_ex 中你可以添加自定义的规则
+			例如： auto_add_event_name_rule 的值（参数 1 为自定义匹配的正则表达式规则，参数 2 为搜索到匹配字符串后要删除的字段）
+			其中，你可以将规则设计的简单一些，然后直接搜索到匹配的字符串，这样子参数 2 可以为空
+		"
+	},
+}

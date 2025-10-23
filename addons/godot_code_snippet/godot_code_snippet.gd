@@ -132,5 +132,6 @@ func check_script_has_auto_tip(line : String) -> void:
 		regex.compile(rule[0])
 		var result = regex.search(line)
 		if result:
-			var str : String = result.get_string().remove_chars(" ").trim_prefix(rule[1])
+			var str : String = result.get_string().remove_chars(" ")
+			str = str.trim_prefix(rule[1]) if rule.size() == 2 else str
 			snippets[str] = str
