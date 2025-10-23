@@ -65,7 +65,7 @@ func _on_code_completion_requested(code_edit : CodeEdit):
 		# 添加自定义补全项
 		code_edit.add_code_completion_option(
 			CodeEdit.KIND_FUNCTION,
-			keyword,
+			keyword + " ",
 			default[keyword],
 			Color.AQUA,
 			load("res://addons/godot_code_snippet/icons/tip_icon_2.svg")
