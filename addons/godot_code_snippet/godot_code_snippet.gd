@@ -56,7 +56,8 @@ func _on_code_completion_requested(code_edit : CodeEdit):
 				CodeEdit.KIND_FUNCTION,
 				keyword,
 				snippets[keyword],
-				Color.AQUA
+				Color.AQUA,
+				load("res://addons/godot_code_snippet/icons/tip_icon_1.svg")
 				)
 		return
 	if default.is_empty(): return
@@ -66,7 +67,8 @@ func _on_code_completion_requested(code_edit : CodeEdit):
 			CodeEdit.KIND_FUNCTION,
 			keyword,
 			default[keyword],
-			Color.AQUA
+			Color.AQUA,
+			load("res://addons/godot_code_snippet/icons/tip_icon_2.svg")
 			)
 
 # FUNC 获取当前行代码

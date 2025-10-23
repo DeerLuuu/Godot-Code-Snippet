@@ -1,6 +1,6 @@
 {
 	"my_custom_codes" : {
-
+		"varc" : "var name"
 	},
 	"config" : {
 		"auto_add_reg_ex_enabled" : false,

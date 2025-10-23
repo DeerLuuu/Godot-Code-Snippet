@@ -11,3 +11,6 @@
 2. 打开压缩包，将addons文件夹放入你的项目根目录中
 3. 启动引擎，启动插件
 4. 修改 'config.json' 文件进行你的自定义代码片段配置和规则匹配
+
+### 使用的资源
+- tip_icon_2.svg、tip_icon_1.svg 来自 [font-awesome](https://www.iconfinder.com/font-awesome)
