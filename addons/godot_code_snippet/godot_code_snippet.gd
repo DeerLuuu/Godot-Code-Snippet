@@ -42,6 +42,7 @@ func _on_script_file_changed(script : Script) -> void:
 	if not current_editor: return
 	var code_edit : CodeEdit = _find_code_edit(current_editor)
 	if not code_edit: return
+
 	# 自定义代码段的补全相关信号链接
 	if code_edit.code_completion_requested.is_connected(_on_code_completion_requested):
 		code_edit.code_completion_requested.disconnect(_on_code_completion_requested)
@@ -50,10 +51,12 @@ func _on_script_file_changed(script : Script) -> void:
 # FUNC 激活自动补全时的信号方法
 func _on_code_completion_requested(code_edit : CodeEdit):
 	var line_text : String = get_current_line_text(code_edit)
-	var prefix = _get_selected_text(code_edit)
-	if line_text.contains("\"") or line_text.contains("\'"):
-		if not line_text.contains("subscribe("): return
+	var select_text : String = get_word_under_cursor(code_edit)
+
+	if select_text.contains("\"") \
+	or select_text.contains("\'"):
 		if snippets.is_empty(): return
+		if line_text.strip_edges().begins_with("\"") or line_text.strip_edges().begins_with("\'"): return
 		for keyword in snippets:
 			code_edit.add_code_completion_option(
 				CodeEdit.KIND_FUNCTION,
@@ -62,6 +65,7 @@ func _on_code_completion_requested(code_edit : CodeEdit):
 				Color.AQUA,
 				load("res://addons/godot_code_snippet/icons/tip_icon_1.svg")
 				)
+		code_edit.update_code_completion_options(true)
 		return
 	if default.is_empty(): return
 	for keyword in default:
@@ -74,6 +78,7 @@ func _on_code_completion_requested(code_edit : CodeEdit):
 			Color.AQUA,
 			load("res://addons/godot_code_snippet/icons/tip_icon_2.svg")
 			)
+	code_edit.update_code_completion_options(true)
 
 # FUNC 获取当前行代码
 func get_current_line_text(_code_edit: CodeEdit) -> String:
@@ -86,11 +91,11 @@ func get_word_under_cursor(code_edit: CodeEdit) -> String:
 	var line_text = code_edit.get_line(caret_line)
 
 	var start = caret_column
-	while start > 0 and line_text[start - 1].is_subsequence_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_"):
+	while start > 0 and line_text[start - 1].is_subsequence_of("\"\'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_"):
 		start -= 1
 
 	var end = caret_column
-	while end < line_text.length() and line_text[end].is_subsequence_of("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_"):
+	while end < line_text.length() and line_text[end].is_subsequence_of("\"\'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_"):
 		end += 1
 
 	return line_text.substr(start, end - start)
@@ -141,4 +146,3 @@ func check_script_has_auto_tip(line : String) -> void:
 			var str : String = result.get_string().remove_chars(" ")
 			str = str.trim_prefix(rule[1]) if rule.size() == 2 else str
 			snippets[str] = str
-			print(str)
