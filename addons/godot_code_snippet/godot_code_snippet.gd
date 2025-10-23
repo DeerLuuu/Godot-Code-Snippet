@@ -133,5 +133,4 @@ func check_script_has_auto_tip(line : String) -> void:
 		var result = regex.search(line)
 		if result:
 			var str : String = result.get_string().remove_chars(" ").trim_prefix(rule[1])
-			snippets[str] = "event:" + str
-			print(str)
+			snippets[str] = str
