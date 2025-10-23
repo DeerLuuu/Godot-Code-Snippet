@@ -8,12 +8,15 @@ var default : Dictionary
 var snippets : Dictionary
 
 func _enter_tree() -> void:
-	update_code_block_dic()
 	script_editor = EditorInterface.get_script_editor()
 	script_editor.editor_script_changed.connect(_on_script_file_changed)
 	script_editor.editor_script_changed.emit(script_editor.get_current_script())
 	var fl = EditorInterface.get_resource_filesystem()
 	fl.filesystem_changed.connect(fs_update)
+
+	_on_script_file_changed(null)
+	fs_update()
+
 
 func _exit_tree() -> void:
 	script_editor = null
@@ -62,7 +65,7 @@ func _on_code_completion_requested(code_edit : CodeEdit):
 		return
 	if default.is_empty(): return
 	for keyword in default:
-		if not keyword.contains(line_text.strip_edges()): continue
+		if not keyword.contains(line_text.strip_edges()) and not config["inline_completion_enabled"]: continue
 		# 添加自定义补全项
 		code_edit.add_code_completion_option(
 			CodeEdit.KIND_FUNCTION,
@@ -138,3 +141,4 @@ func check_script_has_auto_tip(line : String) -> void:
 			var str : String = result.get_string().remove_chars(" ")
 			str = str.trim_prefix(rule[1]) if rule.size() == 2 else str
 			snippets[str] = str
+			print(str)

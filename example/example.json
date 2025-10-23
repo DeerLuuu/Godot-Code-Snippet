@@ -5,6 +5,7 @@
 		"tweenc" : "var tween : Tween = create_tween()",
 	},
 	"config" : {
+		"inline_completion_enabled" : false,
 		"auto_add_reg_ex_enabled" : true,
 		"auto_add_reg_ex" : {
 			"auto_add_event_name_rule" : [
@@ -23,6 +24,7 @@
 			‘期望显示在自动提升中的提示词’ : ‘自动补全的字段，如需换行或制表符请使用对应的 \n \t’
 		",
 		"config" : "你可以在 config 中自定义规则，将符合规则的字符串加入自动提示中",
+		"config[inline_completion_enabled]" : "开启或关闭行内自定义代码段提示",
 		"config[auto_add_reg_ex_enabled]" : "开启或关闭自定义规则功能",
 		"config[auto_add_reg_ex]" : "在 auto_add_reg_ex 中你可以添加自定义的规则
 			例如： auto_add_event_name_rule 的值（参数 1 为自定义匹配的正则表达式规则，参数 2 为搜索到匹配字符串后要删除的字段）

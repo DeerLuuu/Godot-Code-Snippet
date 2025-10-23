@@ -3,6 +3,7 @@
 		"varc" : "var name"
 	},
 	"config" : {
+		"inline_completion_enabled" : false,
 		"auto_add_reg_ex_enabled" : false,
 		"auto_add_reg_ex" : {
 
