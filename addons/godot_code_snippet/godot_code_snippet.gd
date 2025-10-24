@@ -69,7 +69,7 @@ func _on_code_completion_requested(code_edit : CodeEdit):
 		return
 	if default.is_empty(): return
 	for keyword in default:
-		if not keyword.contains(line_text.strip_edges()) and not config["inline_completion_enabled"]: continue
+		if not keyword.contains(line_text.strip_edges()): continue
 		# 添加自定义补全项
 		code_edit.add_code_completion_option(
 			CodeEdit.KIND_FUNCTION,
@@ -78,7 +78,6 @@ func _on_code_completion_requested(code_edit : CodeEdit):
 			Color.AQUA,
 			load("res://addons/godot_code_snippet/icons/tip_icon_2.svg")
 			)
-	code_edit.update_code_completion_options(true)
 
 # FUNC 获取当前行代码
 func get_current_line_text(_code_edit: CodeEdit) -> String:
