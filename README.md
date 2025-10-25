@@ -1,4 +1,7 @@
 # Godot-Code-Snippet
+
+![image](https://github.com/DeerLuuu/Godot-Code-Snippet/blob/main/addons/godot_code_snippet/icons/output_icon.png)
+
 一个Godot自定义代码片段的插件
 
 - [x] 基本的自定义代码片段自动补全功能
